@@ -1,8 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="logo">
-    <h1>e v e y</h1>
+<div class="header">
+    <div class="logo">
+        <i class="fa-solid fa-droplet"></i>
+        <h1>e v e y</h1>
+    </div>
+
+    <a style="display:block" href="{{ route('register')  }}">
+        <button>Sign up</button>
+    </a>
 </div>
 
 <div class="row">
@@ -15,13 +22,14 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <input type="text" placeholder="email@example.com" name="email" required />
+                <input type="email" placeholder="email@example.com" name="email" required />
                 <input type="password" placeholder="password" name="password" required />
-                <input type="submit" value="Sign in" />
+                <input style="margin-top: 72px;" type="submit" value="Sign in" />
 
             </form>
         </div>
     </div>
-    <img class="cover-image" src="https://i.pinimg.com/564x/ef/ee/51/efee512cc7a7d89ee64f42321a8c8ef5.jpg" alt="cover image" />
+
+    <img class="cover-image" src="https://i.pinimg.com/564x/ef/ee/51/efee512cc7a7d89ee64f42321a8c8ef5.jpg" alt="image" />
 </div>
 @endsection

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-
+use App\Models\document;
 
 class User extends Authenticatable
 {
@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'avatar',
     ];
 
     /**
@@ -45,10 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function role(): Attribute
+    public function documents()
     {
-        return new Attribute(
-            get: fn ($value) =>  ["user", "admin"][$value],
-        );
+        return $this->hasMany(Document::class);
     }
 }
