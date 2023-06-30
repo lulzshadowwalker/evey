@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -32,7 +32,6 @@
                 </div>
 
                 <input id="name" type="text" placeholder="Username" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
                 <input type="text" name="phone" placeholder="07 ⏺⏺⏺ ⏺⏺⏺ ⏺⏺" pattern="[0][7][789][0-9]{7}" required>
 
                 @if ($errors->has('name'))

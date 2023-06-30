@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,14 +29,14 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'dashboard.',
         ],
         function () {
-            Route::get('/users', [HomeController::class, 'users'])->name('users');
+            Route::get('/users', [UsersController::class, 'index'])->name('users');
             Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
 
-            Route::get('/signals', [HomeController::class, 'signals'])->name('signals')->middleware('networking');
+            Route::get('/signals', [HomeController::class, 'signals'])->name('signals');
 
-            Route::get('/inbox', [HomeController::class, 'inbox'])->name('inbox')->middleware('marketing');
+            Route::get('/inbox', [HomeController::class, 'inbox'])->name('inbox');
 
-            Route::get('/role-management', [RolesController::class, 'index'])->name('role-management')->middleware('admin');
+            Route::get('/role-management', [RolesController::class, 'index'])->name('role-management');
         }
     );
 });

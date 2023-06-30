@@ -3,6 +3,7 @@
 namespace Illuminate\Foundation\Auth;
 
 use App\Http\Controllers\DocumentsController;
+use App\Models\Role;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,9 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 use function GuzzleHttp\Promise\all;
 
-
-
-trait _
+trait RegistersUsers
 {
     use RedirectsUsers;
 
@@ -43,6 +42,8 @@ trait _
         }
 
         event(new Registered($user = $this->create($data)));
+
+        $user->roles()->attach(Role::USER);
 
         if ($request->hasFile('documents')) {
             foreach ($data['documents'] as $doc) {

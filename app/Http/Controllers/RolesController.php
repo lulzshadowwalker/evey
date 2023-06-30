@@ -18,16 +18,6 @@ class RolesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,33 +25,15 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title'  => ['required', 'string']
+        ]);
+
         Role::create([
             'title' => $request->title,
         ]);
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
-    {
-        //
     }
 
     /**
@@ -73,6 +45,10 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        $this->validate($request, [
+            'title'  => ['required', 'string']
+        ]);
+
         $role->update([
             'title' => $request->title
         ]);
