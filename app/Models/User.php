@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
+        'phone',
     ];
 
     /**
@@ -48,5 +49,10 @@ class User extends Authenticatable
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }
