@@ -16,8 +16,12 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->wantsJson()) {
+            return response()->json(User::with('roles')->get());
+        }
+
         return view('dashboard.users', ['users' => User::all()]);
     }
 
@@ -109,5 +113,11 @@ class UsersController extends Controller
         User::destroy($user->id);
 
         return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $user = User::with('roles')->find($id);
+        return $user ? response()->json($user) : response()->json(['message', 'user not found'], 404);
     }
 }
