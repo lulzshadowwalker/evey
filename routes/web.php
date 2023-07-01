@@ -20,8 +20,10 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::get('/', function () {
+        return redirect()->route('dashboard.users');
+    });
 
     Route::group(
         [
@@ -31,12 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
         function () {
             Route::get('/users', [UsersController::class, 'index'])->name('users');
             Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
-
-            Route::get('/signals', [HomeController::class, 'signals'])->name('signals');
-
-            Route::get('/inbox', [HomeController::class, 'inbox'])->name('inbox');
-
-            Route::get('/role-management', [RolesController::class, 'index'])->name('role-management');
+            Route::get('/signals', [HomeController::class, 'signals'])->name('signals')->middleware('networking');
+            Route::get('/inbox', [HomeController::class, 'inbox'])->name('inbox')->middleware('marketing');
+            Route::get('/role-management', [RolesController::class, 'index'])->name('role-management')->middleware('admin');
         }
     );
 });

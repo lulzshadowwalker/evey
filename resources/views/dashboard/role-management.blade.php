@@ -46,7 +46,7 @@
                 </td>
 
                 <td>
-                    <form method="POST" action="{{ route('roles.destroy', $role) }}">
+                    <form method="POST" action="{{ route('api.roles.destroy', $role) }}">
                         @csrf
                         @method('DELETE')
 
@@ -65,7 +65,7 @@
 <dialog id="{{ 'role-dialog-' . $role->id  }}" class="dialog">
     <h3>Edit role</h3>
 
-    <form method="POST" action="{{ route('roles.update', $role) }}">
+    <form method="POST" action="{{ route('api.roles.update', $role) }}">
         @csrf
         @method('PATCH')
 
@@ -80,7 +80,7 @@
 <dialog id="role-dialog" class="dialog">
     <h3>Create a new role</h3>
 
-    <form method="POST" action="{{ route('roles.store') }}">
+    <form method="POST" action="{{ route('api.roles.store') }}">
         @csrf
 
         <input type="text" name="title" placeholder="what do you wanna call it 🤔" required>

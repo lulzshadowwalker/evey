@@ -64,7 +64,6 @@
 
 .styled-table tr .display-on-hover {
     display: none;
-    background-color: green;
 }
 
 .styled-table tr:hover .display-on-hover {

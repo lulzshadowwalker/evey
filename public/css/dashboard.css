@@ -7,7 +7,8 @@
     margin: 12px 0px 0px 12px;
     border-top-left-radius: 45px;
     border-top-right-radius: 10px;
-    position: relative;
+    position: fixed;
+    height: 100%;
     background-color: #212121;
     display: flex;
     flex-direction: column;
@@ -18,6 +19,7 @@
 
 .main {
     flex-grow: 1;
+    margin-left: 80px !important;
 }
 
 body {
@@ -38,7 +40,7 @@ body {
     flex-direction: column;
     gap: 24px;
     position: absolute;
-    bottom: 32px;
+    bottom: 150px;
 }
 
 .logo {

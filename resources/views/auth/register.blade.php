@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <img class="cover-image" src="https://i.pinimg.com/564x/ef/ee/51/efee512cc7a7d89ee64f42321a8c8ef5.jpg" alt="image" />
+    <img class="cover-image" src="https://images.unsplash.com/photo-1588097281266-310cead47879?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="image" />
 </div>
 
 <script>

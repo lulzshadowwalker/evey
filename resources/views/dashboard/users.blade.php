@@ -11,9 +11,11 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 <div class="main">
+    @can('create')
     <div id="fab" class="floating-action-button">
         <i class="fa-solid fa-plus"></i>
     </div>
+    @endcan
 
     <table class="styled-table">
         <thead>
@@ -29,7 +31,7 @@
 
         <tbody>
             @foreach($users as $user)
-            <tr onclick="handleUpdateDialog({{ $user->id }})" class={{ $user->id === Auth::user()->id ? 'active-row' : '' }}>
+            <tr @can('update', $user) onclick="handleUpdateDialog({{ $user->id }})" @endcan class={{ $user->id === Auth::user()->id ? 'active-row' : '' }}>
                 <td class=" multi">
                     <img class="smol-avatar" src="{{ asset('storage/' . $user['avatar']) }}" alt="user avatar" />
                     {{ $user->name  }}
@@ -50,7 +52,7 @@
                 </td>
 
                 <td>
-                    <form method="POST" action="{{ route('users.destroy', $user) }}">
+                    <form method="POST" action="{{ route('api.users.destroy', $user) }}">
                         @csrf
                         @method('DELETE')
 
@@ -67,17 +69,16 @@
 
 @foreach($users as $user)
 <dialog id="{{ 'update-form-' . $user->id  }}">
-    <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('api.users.update', $user->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-
 
         <input class="image-input" name="avatar" type="file" accept="image/*" style="display:none">
         <div id="avatar" class="avatar">
             <img src="{{ asset('storage/' . $user['avatar']) }}" style="object-fit: cover; height: 82px; width: 82px; border-radius: 100%;">
         </div>
 
-        <input id="name" type="text" placeholder="Username" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value={{ $user->name }} required autofocus>
+        <input id="name" type="text" placeholder="Username" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required autofocus>
         <input type="text" name="phone" placeholder="07 ⏺⏺⏺ ⏺⏺⏺ ⏺⏺" pattern="[0][7][789][0-9]{7}" value={{ $user->phone }} required>
 
         @if ($errors->has('name'))
@@ -113,10 +114,11 @@
 @endforeach
 
 <dialog id="user-dialog" class="dialog">
-    <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('api.users.store') }}" enctype="multipart/form-data">
         @csrf
+        @method('POST')
 
-        <input id="image-input" name="avatar" type="file" accept="image/*" style="display:none">
+        <input class="image-input" name="avatar" type="file" accept="image/*" style="display:none">
         <div class="avatar">
             <lottie-player style="object-fit:cover;" src="https://assets10.lottiefiles.com/packages/lf20_tp6fqnn5.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
         </div>
@@ -150,8 +152,8 @@
 
 
 
-        <div id="files-container" class="files">
-            <input style="display:none;" type="file" id="file-picker" name="documents[]" multiple>
+        <div class="files files-container" class="files">
+            <input style="display:none;" type="file" class="file-picker" name="documents[]" multiple>
 
             <div class="multi">
                 <i class="fa-solid fa-file"></i>
@@ -159,21 +161,25 @@
             </div>
         </div>
 
-        <input type="submit" value="Sign up" />
+        <input type="submit" value="Create User" />
 
     </form>
 </dialog>
 
 <script>
     const fab = document.querySelector("#fab");
-    const createUserDialog = document.getElementById("user-dialog");
 
     fab.addEventListener("click", () => {
-        createUserDialog.showModal();
+        const dialog = document.getElementById("user-dialog");
+        handleUserDialog(dialog);
     });
 
     function handleUpdateDialog(userId) {
         const dialog = document.getElementById('update-form-' + userId);
+        handleUserDialog(dialog);
+    }
+
+    function handleUserDialog(dialog) {
 
         let imagePicker = dialog.querySelector('.image-input');
         let avatar = dialog.querySelector('.avatar');
