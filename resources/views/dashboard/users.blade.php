@@ -52,6 +52,7 @@
                 </td>
 
                 <td>
+                    @can('delete')
                     <form method="POST" action="{{ route('api.users.destroy', $user) }}">
                         @csrf
                         @method('DELETE')
@@ -60,6 +61,7 @@
                             <i class="fa-solid fa-trash" style="font-size: 12px"></i>
                         </button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

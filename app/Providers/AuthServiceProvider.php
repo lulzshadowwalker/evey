@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('create', fn () => $this->isAdmin());
         Gate::define('update', fn (User $user) => $this->isAdmin() || Auth::check() && $user->id == Auth::user()->id);
-        Gate::define('delete', fn () => dd($this->isAdmin()));
+        Gate::define('delete', fn () => $this->isAdmin());
     }
 
     private function isAdmin()

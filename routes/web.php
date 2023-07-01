@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\NetworkingController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -32,9 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
         ],
         function () {
             Route::get('/users', [UsersController::class, 'index'])->name('users');
-            Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
-            Route::get('/signals', [HomeController::class, 'signals'])->name('signals')->middleware('networking');
-            Route::get('/inbox', [HomeController::class, 'inbox'])->name('inbox')->middleware('marketing');
+            Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+            Route::get('/signals', [NetworkingController::class, 'index'])->name('signals')->middleware('networking');
+            Route::get('/inbox', [MarketingController::class, 'index'])->name('inbox')->middleware('marketing');
             Route::get('/role-management', [RolesController::class, 'index'])->name('role-management')->middleware('admin');
         }
     );
