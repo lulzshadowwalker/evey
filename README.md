@@ -1,63 +1,27 @@
-# Laravel 9 + Vite + Svelte + Tailwind CSS
+# e v e y
 
-This starter template includes:
 
--   Laravel 9
--   Vite
--   Svelte
--   Tailwind CSS (w/ `@tailwindcss/forms`)
--   Axios
--   TypeScript
+https://github.com/lulzshadowwalker/evey/assets/92385434/4a1e6aac-115d-4d82-86df-48b4e69c2c68
 
-## Information
 
--   The app is located in [`resources/js/`](/resources/js/).
--   You can use [`resources/css/`](/resources/css/) for styling.
+https://github.com/lulzshadowwalker/evey/assets/92385434/06497096-dd05-4737-a973-1621263d6739
 
-## Installation
 
-Install the composer dependencies:
 
-```bash
-composer install
+
+```
+php artisan migrate &&
+php artisan db:seed --class=CreateUserSeeder && 
+php artisan db:seed --class=CreateRoleSeeder &&
+php artisan db:seed --class=CreateRoleUserSeeder &&
+php artisan db:seed --class=CreateDocumentSeeder
 ```
 
-Make a copy of the `.env.example` file named `.env`:
-
-```bash
-cp .env.example .env
+```
+mv sample-images storage/app/public/images &&
+mv sample-documents storage/app/public/documents
 ```
 
-Generate an app key:
-
-```bash
-php artisan key:generate
 ```
-
-Install all `package.json` dependencies:
-
-```bash
-npm install
+/// copy the CustomRegistersUsers.php instead of the RegistersUsers.php 🙄
 ```
-
-Run vite to serve your assets/bundle:
-
-```bash
-npm run dev
-```
-
-Open a new terminal instance and serve the application:
-
-```bash
-php artisan serve
-```
-
-## Deployment
-
-Build the app:
-
-```bash
-npm run build
-```
-
-Now all you have to do is serve the Laravel app in a production environment.
